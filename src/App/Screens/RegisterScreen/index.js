@@ -13,20 +13,20 @@ export default class RegisterScreen extends Component {
     super(props);
 
     this.state = {
-      // userAccount: {
-      //   username: false,
-      //   email: false,
-      //   phoneNumber: false,
-      //   password: false,
-      //   passwordConfirmation: false,
-      // },
       userAccount: {
-        username: 'test1',
-        email: 'test1@getnada.com',
-        phoneNumber: '081210197875',
-        password: '123123@',
-        passwordConfirmation: '123123@',
+        username: false,
+        email: false,
+        phoneNumber: false,
+        password: false,
+        passwordConfirmation: false,
       },
+      // userAccount: {
+      //   username: 'test1',
+      //   email: 'test1@getnada.com',
+      //   phoneNumber: '081210197875',
+      //   password: '123123@',
+      //   passwordConfirmation: '123123@',
+      // },
       isLoading: false,
       isLoadingPopUp: false,
       popUp: {
@@ -38,14 +38,6 @@ export default class RegisterScreen extends Component {
       }
     };
   }
-
-  setItem = async (newData) => {
-    await AsyncStorage.setItem('user', JSON.stringify(newData));
-  }
-  // getItem = async () => {
-  //   const result = await AsyncStorage.getItem('user');
-  //   return JSON.parse(result);
-  // }
 
   _handlerOnPressAccept = (isSuccess = false) => {
     this.setState({ isLoadingPopUp: true })
@@ -85,9 +77,6 @@ export default class RegisterScreen extends Component {
     this.setState({ isLoadingPopUp: true });
     const { system, user } = data?.status?.messages;
     const { username, email, password } = user;
-
-    // console.log(console.log("_handlerPopUp@result =====================>", JSON.stringify(data, null, 2)));
-    // console.log(console.log("_handlerPopUp@isSuccess =====================>", JSON.stringify(isSuccess, null, 2)));
 
     const Title = system;
     const invalidUsername = username ? `${username[0]} \n` : '';
@@ -137,38 +126,12 @@ export default class RegisterScreen extends Component {
         }, 1500);
       }
 
-
-
-      // const oldData = await AsyncStorage.getItem('user');
-
-      // if (oldData === null) {
-      //   this.setItem(newData);
-      //   this._handlerStateAfterRegist();
-      // }
-
-
-
-      // else {
-
-      // stack.push(JSON.parse(oldData));
-      // stack.push(newData);
-      // this.setItem(stack);
-      // this._handlerStateAfterRegist();
-      // }
     } else {
       setTimeout(() => {
         this._handlerValidateInput();
         this.setState({ isLoading: false });
       }, 1500);
     }
-  }
-
-  _getData = async () => {
-    const getData = await AsyncStorage.getItem('user');
-    // const getDataParse = JSON.parse(getData);
-    // console.log('_getData >>', getData);
-
-    // AsyncStorage.clear();
   }
 
   _handlerValidateInput = () => {
@@ -194,10 +157,7 @@ export default class RegisterScreen extends Component {
     const { userAccount, popUp, isLoading, isLoadingPopUp } = this.state;
     const { username, email, phoneNumber, password, passwordConfirmation } = userAccount;
     const { visible, icon, title, description, labelAccept, onPressAccept } = popUp;
-
     const keyboardType = Platform.OS === 'ios' ? 'ascii-capable' : 'visible-password';
-    // console.log('userAccount', this.state.userAccount);
-    // this._getData();
 
     return (
       <View style={styles.container} >

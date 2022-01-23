@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import {
-  View,
   Text,
   Image,
   TouchableOpacity,
-  ScrollView,
-  AsyncStorage
+  ScrollView
 } from 'react-native';
 
 import { styles } from './style';
 import { getNews } from '../../Global/Helper/Action';
 import { NavigateTo } from '../../../MultiPlatform/Navigator/Navigator';
 import CBackNavigationHeader from '../../Global/Components/CBackNavigationHeader';
+import { connect } from 'react-redux';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -24,29 +23,21 @@ export default class HomeScreen extends Component {
 
   componentDidMount = async () => {
     this._handlerGetData();
-    this._handlerGetDataStorage();
   }
 
   _handlerGetData = async () => {
     try {
       const result = await getNews();
-      console.log("result.data.articles >>>", JSON.stringify(result.data.articles, null, 2))
 
       this.setState({
-        dataContent: result.data.articles
+        dataContent: result?.data?.articles
       });
     } catch (error) {
       console.log("HomeScreen.js@_handlerGetData >>> ", JSON.stringify(error, null, 2))
     }
   }
 
-  _handlerGetDataStorage = async () => {
-    const oldData = await AsyncStorage.getItem('user');
-    // console.log("AsyncStorage.getItem >>>", JSON.stringify(JSON.parse(oldData), null, 2))
-  }
-
   render() {
-    const { navigation } = this.props;
     const { dataContent } = this.state;
 
     return (
@@ -93,3 +84,11 @@ export default class HomeScreen extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const { accessToken } = state;
+
+  return { accessToken };
+}
+
+
+export default connect(mapStateToProps)(HomeScreen);

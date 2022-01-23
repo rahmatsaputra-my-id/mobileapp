@@ -1,37 +1,36 @@
-// import { loginReducer } from "../../../Screens/LoginScreen/reducer";
+import {
+  loginReducer
+} from "../../../Screens/LoginScreen/reducer";
+import {
+  SET_WIDTH_LISTENER
+} from "../Constants";
 
-// export const SET_WIDTH_LISTENER = 'SET_WIDTH_LISTENER';
+const defaultState = {
+  widthListener: false,
+};
 
-// const defaultState = {
-//   widthListener: false,
-// }
+const appReducer = (state = defaultState, action) => {
+  let _state = loginReducer(state, action);
 
-// const appReducer = (state = defaultState, action) => {
-//   let _state = loginReducer(state, action);
+  switch (action.type) {
+    case SET_WIDTH_LISTENER:
+      _state = {
+        ...state,
+        widthListener: action.widthListener
+      };
+      break;
 
-//   switch (action.type) {
-//     case SET_WIDTH_LISTENER:
-//       _state = {
-//         ...state,
-//         widthListener: action.widthListener
-//       };
-//       break;
+    default:
+      break;
+  }
+  
+  state = { _state, ..._state };
 
-//     default:
-//       break;
-//   }
+  return state;
+}
 
-//   state = { _state, ..._state };
+const rootReducer = (state, action) => {
+  return appReducer(state, action);
+}
 
-//   return state;
-// }
-
-// const rootReducer = (state, action) => {
-//   // if(action.type === 'LOGOUT'){
-
-//   // }
-
-//   return appReducer(state, action);
-// }
-
-// export { defaultState, rootReducer };
+export { defaultState, rootReducer };

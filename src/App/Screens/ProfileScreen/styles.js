@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   cardContainer: {
+    paddingBottom: 16,
     backgroundColor: Colors.white,
     borderWidth: 0,
     flex: 1,
@@ -113,4 +114,8 @@ export const styles = StyleSheet.create({
     borderColor: Colors.grey93,
     borderWidth: 0.8,
   },
+  buttonContainer: {
+    width: '100%',
+    paddingHorizontal: 16
+  }
 });

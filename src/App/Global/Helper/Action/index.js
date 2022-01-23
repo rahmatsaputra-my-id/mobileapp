@@ -1,6 +1,6 @@
 
 import Axios from "axios";
-import { apiKey, base } from "./Initial";
+import { base, apiKey } from "../../Configuration/Constants";
 
 export const postLogin = async (email, password) => {
   try {
@@ -28,26 +28,26 @@ export const postLogin = async (email, password) => {
   }
 };
 
-// export const postLogout = async (email, password) => {
-//   try {
-//     const config = {
-//       headers: {
-//         'Authorization': `Bearer ${accessToken}`
-//       }
-//     };
+export const postLogout = async (accessToken) => {
+  try {
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
 
-//     const url = `${base.url}/v0/logout`;
+    const url = `${base.url}/v0/logout`;
 
-//     return await Axios.post(url, false, config);
-//   } catch (error) {
-//     let errorResponse = {
-//       isError: true
-//     };
-//     // console.log("ActionGlobal@postLogout >>>", error.response);
+    return await Axios.post(url, false, config);
+  } catch (error) {
+    let errorResponse = {
+      isError: true
+    };
+    // console.log("ActionGlobal@postLogout >>>", error.response);
 
-//     return error.response;
-//   }
-// };
+    return error.response;
+  }
+};
 
 export const postRegister = async (username, email, phone, password, password_confirmation) => {
   try {

@@ -1,13 +1,13 @@
 import { defaultState } from "../../Global/Configuration/Reducer";
 
-export const SET_ACCESS_TOKEN_APP = 'SET_ACCESS_TOKEN_APP';
+export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 
 export const loginReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SET_ACCESS_TOKEN_APP:
+    case SET_ACCESS_TOKEN:
       return {
         ...state,
-        accessTokenData: action.data
+        accessToken: action.data
       }
 
     default:
