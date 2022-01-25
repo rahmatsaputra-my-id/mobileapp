@@ -35,17 +35,15 @@ export const styles = StyleSheet.create({
   },
 
   inputBox: {
-    width: '100%',
+    width: '52%',
     backgroundColor: 'rgba(255, 255,255,0.2)',
     borderRadius: 16,
     paddingHorizontal: 16,
     fontSize: 25,
     color: '#ffffff',
-    // marginVertical: 10,
   },
 
   noteContainer: {
-    // backgroundColor: 'blue',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'

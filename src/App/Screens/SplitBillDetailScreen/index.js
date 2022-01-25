@@ -4,7 +4,7 @@ import CBackNavigationHeader from '../../Global/Components/CBackNavigationHeader
 import CText from '../../Global/Components/CText';
 import { styles } from './style';
 import { iconSuccess, iconFailed, iconArrowRight, iconTotal, iconNote } from '../../Assets/Shared';
-import { maxLengthString } from '../../Global/Helper/Function';
+import { formatRupiah, maxLengthString } from '../../Global/Helper/Function';
 import CButton from '../../Global/Components/CButton';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -27,6 +27,10 @@ export default class SplitBillDetailScreen extends Component {
     const note1 = 'beli makan dirumah itu yang banyak banget terus dibawa pulang'
     const username = "Muhammad Rizky Al Fatih"
     const keyboardType = Platform.OS === 'ios' ? 'ascii-capable' : 'visible-password';
+    // const price = formatRupiah(50000, 'Rp. ');
+    // console.log('price', price);
+    // console.log('total', total);
+
 
     return (
       <ScrollView
@@ -49,8 +53,8 @@ export default class SplitBillDetailScreen extends Component {
                   placeholderTextColor={Colors.white}
                   selectionColor={Colors.white}
                   keyboardType={'number-pad'}
-                  value={total}
-                  maxLength={7}
+                  value={formatRupiah(total)}
+                  maxLength={12}
                   onChangeText={(totalValue) =>
                     this.setState({
                       invoice: {
@@ -74,11 +78,11 @@ export default class SplitBillDetailScreen extends Component {
                   />
 
                   {/* <TextInput
-                // value={number}
-                placeholder="Write Notes"
-                style={styles.noteInput}
-                keyboardType='number-pad'
-              /> */}
+                    // value={number}
+                    placeholder="Write Notes"
+                    style={styles.noteInput}
+                    keyboardType='number-pad'
+                  /> */}
                   <CText
                     style={styles.note}
                     children={`"${maxLengthString(note1, 25)}"`}
