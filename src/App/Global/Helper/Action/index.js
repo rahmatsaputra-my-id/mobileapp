@@ -49,6 +49,27 @@ export const postLogout = async (accessToken) => {
   }
 };
 
+export const getUser = async (accessToken) => {
+  try {
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
+
+    const url = `${base.url}/v0/user`;
+
+    return await Axios.get(url, config);
+  } catch (error) {
+    let errorResponse = {
+      isError: true
+    };
+    // console.log("ActionGlobal@postLogout >>>", error.response);
+
+    return error.response;
+  }
+};
+
 export const postRegister = async (username, email, phone, password, password_confirmation) => {
   try {
     const config = {

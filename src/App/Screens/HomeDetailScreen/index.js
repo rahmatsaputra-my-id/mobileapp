@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Image, ScrollView } from 'react-native';
+import { Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { openUrl } from '../../Global/Helper/Function';
 import { styles } from './style';
 
 export default function HomeDetailScreen({ route }) {
@@ -18,6 +19,13 @@ export default function HomeDetailScreen({ route }) {
         source={{ uri: urlToImage }}
       />
       <Text style={styles.sinopsis}>{content ? content : description}</Text>
+      <TouchableOpacity
+        onPress={() => { openUrl(url) }}
+      >
+        <Text style={styles.sinopsis}>
+          {'View More >>>'}
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

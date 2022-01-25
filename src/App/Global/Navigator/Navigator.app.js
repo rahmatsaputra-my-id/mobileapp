@@ -9,6 +9,9 @@ import BottomTab from './BottomTab';
 import LoginScreen from '../../Screens/LoginScreen';
 import RegisterScreen from '../../Screens/RegisterScreen';
 import VerifyOTPScreen from '../../Screens/VerifyOTPScreen';
+import SplitBillScreen from '../../Screens/SplitBillScreen';
+import SplitBillDetailScreen from '../../Screens/SplitBillDetailScreen';
+import SplitBillHistoryScreen from '../../Screens/SplitBillHistoryScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +22,21 @@ export const NavigatorApps = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SplitBillScreen"
+          component={SplitBillScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SplitBillDetailScreen"
+          component={SplitBillDetailScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SplitBillHistoryScreen"
+          component={SplitBillHistoryScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

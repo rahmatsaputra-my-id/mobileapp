@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { NavigationContext } from 'react-navigation';
 
 // Assets
 import { iconArrowLeft } from '../../../Assets/Shared';
@@ -13,6 +12,7 @@ import { iconArrowLeft } from '../../../Assets/Shared';
 // Components
 import CText from '../CText';
 import CFlexRow from '../CFlexRow';
+import { NavigationContext } from '@react-navigation/native';
 
 /**
  * Orbit back header app.

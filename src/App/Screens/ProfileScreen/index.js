@@ -11,7 +11,7 @@ import {
 import { styles } from './styles';
 import { iconRahmatSaputra } from '../../Assets/Shared';
 import { connect } from 'react-redux';
-import { postLogout } from '../../Global/Helper/Action';
+import { getUser, postLogout } from '../../Global/Helper/Action';
 import CModal from '../../Global/Components/CModal';
 import CButton from '../../Global/Components/CButton';
 import { openUrl } from '../../Global/Helper/Function';
@@ -29,9 +29,18 @@ class ProfileScreen extends Component {
         onPressAccept: false,
         onPressCancel: false
       },
-      isLoading: false,
-      isLoadingPopUp: false
+      isLoadingLogout: false,
+      isLoadingPopUp: false,
+      user: {
+        username: false,
+        email: false,
+        phoneNumber: false
+      }
     }
+  }
+
+  componentDidMount() {
+    this._handlerGetUser();
   }
 
   _handlerOnPressAccept = (isSuccess = false) => {
@@ -39,25 +48,16 @@ class ProfileScreen extends Component {
     const { navigation } = this.props;
 
     try {
-      setTimeout(() => {
-        if (isSuccess) {
-          navigation.navigate('LoginScreen');
-          this.setState({
-            popUp: {
-              visible: false
-            },
-            userAccount: {
-              username: false,
-              email: false,
-              phoneNumber: false,
-              password: false,
-              passwordConfirmation: false,
-            },
-          })
-        } else {
-          this.setState({ popUp: { visible: false } });
-        }
-      }, 1500);
+      if (isSuccess) {
+        navigation.navigate('LoginScreen');
+        this.setState({
+          popUp: {
+            visible: false
+          }
+        })
+      } else {
+        this.setState({ popUp: { visible: false } });
+      }
     } catch (error) {
       return error;
     } finally {
@@ -68,7 +68,7 @@ class ProfileScreen extends Component {
   }
 
   _handlerPopUp = (isConfirm = false, isSuccess = false, data = false) => {
-    this.setState({ isLoadingPopUp: true, isLoading: isConfirm && true });
+    this.setState({ isLoadingPopUp: true, isLoadingLogout: isConfirm && true });
 
     if (isConfirm) {
       setTimeout(() => {
@@ -82,24 +82,16 @@ class ProfileScreen extends Component {
             onPressAccept: () => { this._handlerLogout(); },
             onPressCancel: () => { this.setState({ popUp: { visible: false } }); }
           },
-          isLoading: false,
+          isLoadingLogout: false,
           isLoadingPopUp: false,
         });
       }, 1500);
     } else {
-      const { system, user } = data?.status?.messages;
-
       setTimeout(() => {
         this.setState({
-          popUp: {
-            visible: true,
-            title: system,
-            description: user,
-            labelAccept: 'Understand',
-            onPressAccept: () => { this._handlerOnPressAccept(isSuccess) },
-          },
           isLoadingPopUp: false,
         });
+        this._handlerOnPressAccept(isSuccess)
       }, 1500);
 
     }
@@ -129,9 +121,34 @@ class ProfileScreen extends Component {
     }
   }
 
+  _handlerGetUser = async () => {
+    const { accessToken } = this.props;
+    try {
+      const result = await getUser(accessToken);
+      const data = result.data;
+      const { http_status_code } = data?.meta;
+      const codeValid = (http_status_code === 200);
+      const { username, email, phone } = data.user;
+
+      if (data && codeValid) {
+        this.setState({
+          user: {
+            username: username,
+            email: email,
+            phoneNumber: phone
+          }
+        })
+      }
+
+    } catch (error) {
+      return error;
+    }
+  }
 
   render() {
-    const { popUp, isLoading, isLoadingPopUp } = this.state;
+    const { popUp, isLoadingLogout, isLoadingPopUp, user } = this.state;
+    const { username, email, phoneNumber } = user;
+    console.log('username', username);
     const {
       visible,
       icon,
@@ -158,22 +175,8 @@ class ProfileScreen extends Component {
                     source={iconRahmatSaputra}
                   />
                   <Text style={styles.userNameText}>
-                    {'Rahmat Saputra'}
+                    {username}
                   </Text>
-                  <View style={styles.userAddressRow}>
-                    <View>
-                      <Icon
-                        name="place"
-                        underlayColor="transparent"
-                        iconStyle={styles.placeIcon}
-                      />
-                    </View>
-                    <View style={styles.userCityRow}>
-                      <Text style={styles.userCityText}>
-                        {'Jaksel, DKI Jakarta'}
-                      </Text>
-                    </View>
-                  </View>
                 </View>
               </ImageBackground>
             </View>
@@ -183,7 +186,7 @@ class ProfileScreen extends Component {
               <View style={styles.telContainer}>
                 <View style={styles.telIconRow}>
                   <Icon
-                    name="call"
+                    name="email"
                     underlayColor="transparent"
                     iconStyle={styles.telIcon}
                   />
@@ -191,11 +194,11 @@ class ProfileScreen extends Component {
                 <View style={styles.telRow}>
                   <View style={styles.telNumberColumn}>
                     <Text style={styles.telNumberText}>
-                      {'+62 812 1019 7870'}
+                      {email}
                     </Text>
                   </View>
                   <View style={styles.telNameColumn}>
-                    <Text style={styles.telNameText}>{"Mobile"}</Text>
+                    <Text style={styles.telNameText}>{"Email"}</Text>
                   </View>
                 </View>
               </View>
@@ -211,7 +214,7 @@ class ProfileScreen extends Component {
               <View style={styles.telContainer}>
                 <View style={styles.telIconRow}>
                   <Icon
-                    name="email"
+                    name="call"
                     underlayColor="transparent"
                     iconStyle={styles.telIcon}
                   />
@@ -219,12 +222,12 @@ class ProfileScreen extends Component {
                 <View style={styles.telRow}>
                   <View style={styles.telNumberColumn}>
                     <Text style={styles.telNumberText}>
-                      {'rahmatsaputra.my.id@gmail.com'}
+                      {phoneNumber}
                     </Text>
                   </View>
                   <View style={styles.telNameColumn}>
                     <Text style={styles.telNameText}>
-                      {'Email'}
+                      {'Phone'}
                     </Text>
                   </View>
                 </View>
@@ -238,7 +241,7 @@ class ProfileScreen extends Component {
 
             <View style={styles.buttonContainer}>
               <CButton
-                loading={isLoading}
+                loading={isLoadingLogout}
                 label={'LOGOUT'}
                 onPress={() => this._handlerPopUp(true, false, false)}
               />

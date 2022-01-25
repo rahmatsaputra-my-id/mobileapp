@@ -5,6 +5,7 @@ import HomeScreen from '../../Screens/HomeScreen';
 import ProfileScreen from '../../Screens/ProfileScreen';
 import { Colors, stylesGlobal } from '../Components/CThemes';
 import { iconHome, iconProfile } from '../../Assets/Shared';
+import SplitBillScreen from '../../Screens/SplitBillScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +21,16 @@ export default function BottomTab({ navigation }) {
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <Image source={iconHome} style={{ ...stylesGlobal.bottomTabIcon, tintColor: color }} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="SplitBillScreen"
+        component={SplitBillScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (

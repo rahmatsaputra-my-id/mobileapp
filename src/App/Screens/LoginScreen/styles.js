@@ -3,7 +3,7 @@ import { Colors } from '../../Global/Components/CThemes';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#455a64',
+    backgroundColor: Colors.lightGreen,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

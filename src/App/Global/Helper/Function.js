@@ -14,4 +14,16 @@ export const openUrl = (url) => {
       console.log('Don\'t know how to open URI: ' + url);
     }
   }).catch(err => console.error('An error occurred', err));
-} 
+}
+
+export const maxLengthString = (string, maxLength) => {
+  let temp;
+  if(string){
+    if(string.length >= maxLength){
+      temp = `${string.substring(0, maxLength)}...`;
+    } else{
+      temp = string;
+    }
+  }
+  return temp;
+}
