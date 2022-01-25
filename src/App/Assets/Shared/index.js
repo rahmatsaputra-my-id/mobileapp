@@ -9,3 +9,5 @@ export const iconSuccess = require('./icon-success.png');
 export const iconFailed = require('./icon-failed.png');
 export const iconTotal = require('./icon-total.png');
 export const iconInformation = require('./icon-information.png');
+export const iconSplitBill = require('./icon-split-bill.png');
+export const iconNote = require('./icon-note.png');

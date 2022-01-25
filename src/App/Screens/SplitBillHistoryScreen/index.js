@@ -19,7 +19,7 @@ export default class SplitBillHistoryScreen extends Component {
       }
     }
   }
-  
+
   _handlerPopUp = () => {
     this.setState({
       popUp: {
@@ -50,7 +50,7 @@ export default class SplitBillHistoryScreen extends Component {
           <View style={styles.totalLabelContainer}>
             <CText
               style={styles.totalLabel}
-              children={'TOTAL SPLIT BILL'}
+              children={'TOTAL BILL'}
             />
             <TouchableOpacity
               onPress={() => { this._handlerPopUp() }}
@@ -90,10 +90,14 @@ export default class SplitBillHistoryScreen extends Component {
               children={maxLengthString(data, 15)}
               style={styles.historyCardTitle}
             />
-            <Image
+            <CText
+              children={'Paid'}
+              style={styles.historyCardTitle}
+            />
+            {/* <Image
               style={styles.historyCardIcon}
               source={iconSuccess}
-            />
+            /> */}
           </View>
 
         </View>

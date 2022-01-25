@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../Screens/HomeScreen';
 import ProfileScreen from '../../Screens/ProfileScreen';
 import { Colors, stylesGlobal } from '../Components/CThemes';
-import { iconHome, iconProfile } from '../../Assets/Shared';
+import { iconHome, iconProfile, iconSplitBill } from '../../Assets/Shared';
 import SplitBillScreen from '../../Screens/SplitBillScreen';
 
 const Tab = createBottomTabNavigator();
@@ -32,9 +32,9 @@ export default function BottomTab({ navigation }) {
         name="SplitBillScreen"
         component={SplitBillScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Split Bill',
           tabBarIcon: ({ color }) => (
-            <Image source={iconHome} style={{ ...stylesGlobal.bottomTabIcon, tintColor: color }} />
+            <Image source={iconSplitBill} style={{ ...stylesGlobal.bottomTabIcon, tintColor: color }} />
           )
         }}
       />

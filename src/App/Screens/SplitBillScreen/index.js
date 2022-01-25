@@ -25,12 +25,12 @@ export default class SplitBillScreen extends Component {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollView}
       >
-        <CBackNavigationHeader title={'Split Bill Feature'} icon={false} />
+        <CBackNavigationHeader title={'Split Bill'} icon={false} />
         <View style={styles.content}>
           <Text style={styles.greetingTitle}>{'Want to Request Payment to multiple people?'}</Text>
           <CButton
             onPress={() => {navigation.navigate('SplitBillDetailScreen')}}
-            label={'Split Bill'}
+            label={'Split Your Bill'}
           />
         </View>
         <View style={styles.historyContainer}>
