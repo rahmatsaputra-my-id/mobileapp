@@ -13,16 +13,36 @@ export default class SplitBillDetailScreen extends Component {
     super(props);
     this.state = {
       invoice: {
-        total: false,
+        totalPrice: false,
+        totalParticipant: 1,
         note: false
+      },
+      button: {
+        isDisabled: false,
+        isLoading: false
       }
     }
   }
 
+  // _handlerSplitBill = () => {
+  //   const { invoice, button } = this.state;
+  //   const { totalPrice, note, totalParticipant } = invoice;
+  //   const { isDisabled, isLoading } = button;
+  //   const splitPrice = (totalPrice / totalParticipant);
+  //   let temp;
+
+  //   if (totalPrice > 0) {
+
+  //   }
+
+  // }
+
   render() {
     // const { route } = this.props
-    const { invoice } = this.state;
-    const { total, note } = invoice;
+    const { invoice, button } = this.state;
+    const { totalPrice, note, totalParticipant } = invoice;
+    const { isDisabled, isLoading } = button;
+    const splitPrice = totalPrice > (totalPrice / totalParticipant);
     // const { title, author, description, urlToImage, content, url } = route?.params;
     const note1 = 'beli makan dirumah itu yang banyak banget terus dibawa pulang'
     const username = "Muhammad Rizky Al Fatih"
@@ -47,55 +67,50 @@ export default class SplitBillDetailScreen extends Component {
                   children={'TOTAL BILL'}
                 />
                 <TextInput
-                  style={styles.inputBox}
+                  style={styles.inputBoxTotal}
                   underlineColorAndroid="rgba(0,0,0,0)"
-                  // placeholder="Total"
                   placeholderTextColor={Colors.white}
                   selectionColor={Colors.white}
                   keyboardType={'number-pad'}
-                  value={formatRupiah(total)}
+                  value={formatRupiah(totalPrice)}
                   maxLength={12}
                   onChangeText={(totalValue) =>
                     this.setState({
                       invoice: {
-                        total: totalValue.trim().replace(/[^0-9]/g, ''),
+                        totalPrice: totalValue.trim().replace(/[^0-9]/g, ''),
                         note: note,
                       }
                     })
                   }
                 />
-                {/* <CText
-                  style={styles.total}
-                  children={'Rp10.000.000'}
-                /> */}
               </View>
 
-              <TouchableOpacity style={styles.noteContainer}>
-                <View style={styles.noteWrapper}>
-                  <Image
-                    style={styles.iconNote}
-                    source={iconNote}
-                  />
+              <View style={styles.noteContainer}>
+                <Image
+                  style={styles.iconNote}
+                  source={iconNote}
+                />
 
-                  {/* <TextInput
-                    // value={number}
-                    placeholder="Write Notes"
-                    style={styles.noteInput}
-                    keyboardType='number-pad'
-                  /> */}
-                  <CText
-                    style={styles.note}
-                    children={`"${maxLengthString(note1, 25)}"`}
-                  />
-                </View>
-
-                <View style={styles.arrowRightContainer}>
-                  <CText
-                    style={styles.arrowRightTitle}
-                    children={'Edit'}
-                  />
-                </View>
-              </TouchableOpacity>
+                <TextInput
+                  style={styles.inputBoxNote}
+                  underlineColorAndroid="rgba(0,0,0,0)"
+                  placeholder="Type a note"
+                  placeholderTextColor={Colors.white}
+                  selectionColor={Colors.white}
+                  keyboardType={keyboardType}
+                  value={note}
+                  maxLength={65}
+                  multiline={true}
+                  onChangeText={(noteValue) =>
+                    this.setState({
+                      invoice: {
+                        totalPrice: totalPrice,
+                        note: noteValue.trim(),
+                      }
+                    })
+                  }
+                />
+              </View>
             </View>
 
             <View style={styles.listSplitBill}>
@@ -115,16 +130,23 @@ export default class SplitBillDetailScreen extends Component {
                     style={styles.splitBillCardPhoneNumber}
                   />
                 </View>
-                <CText
-                  children={'Paid'}
-                  style={styles.historyCardTitle}
+                <TextInput
+                  style={styles.inputBoxSplitBillCard}
+                  underlineColorAndroid="rgba(0,0,0,0)"
+                  placeholderTextColor={Colors.white}
+                  selectionColor={Colors.white}
+                  keyboardType={'number-pad'}
+                  value={formatRupiah(totalPrice)}
+                  maxLength={12}
+                  onChangeText={(splitBillValue) =>
+                    this.setState({
+                      invoice: {
+                        total: splitBillValue.trim().replace(/[^0-9]/g, ''),
+                        note: note,
+                      }
+                    })
+                  }
                 />
-                {/* <TextInput
-                // value={number}
-                placeholder="   "
-                // style={styles.splitBillCardInput}
-                keyboardType='number-pad'
-              /> */}
               </View>
               <View style={styles.splitBillCard}>
                 <View>
@@ -137,15 +159,30 @@ export default class SplitBillDetailScreen extends Component {
                     style={styles.splitBillCardPhoneNumber}
                   />
                 </View>
-                <CText
-                  children={'Paid'}
-                  style={styles.historyCardTitle}
+                <TextInput
+                  style={styles.inputBoxSplitBillCard}
+                  underlineColorAndroid="rgba(0,0,0,0)"
+                  placeholderTextColor={Colors.white}
+                  selectionColor={Colors.white}
+                  keyboardType={'number-pad'}
+                  value={formatRupiah(totalPrice)}
+                  maxLength={12}
+                  onChangeText={(splitBillValue) =>
+                    this.setState({
+                      invoice: {
+                        total: splitBillValue.trim().replace(/[^0-9]/g, ''),
+                        note: note,
+                      }
+                    })
+                  }
                 />
               </View>
             </View>
           </View>
           <View style={styles.buttonContainer}>
             <CButton
+              loading={isLoading}
+              disabled={isDisabled}
               label={'SPLIT BILL NOW!'}
             />
           </View>

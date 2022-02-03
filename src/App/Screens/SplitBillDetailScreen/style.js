@@ -16,10 +16,6 @@ export const styles = StyleSheet.create({
   totalContainer: {
     paddingTop: 8,
     paddingBottom: 64,
-    // backgroundColor: 'red'
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center'
   },
 
   totalLabel: {
@@ -34,7 +30,7 @@ export const styles = StyleSheet.create({
     color: Colors.white
   },
 
-  inputBox: {
+  inputBoxTotal: {
     width: '52%',
     backgroundColor: 'rgba(255, 255,255,0.2)',
     borderRadius: 16,
@@ -45,28 +41,25 @@ export const styles = StyleSheet.create({
 
   noteContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-
-  noteWrapper: {
-    flexDirection: 'row'
+    width: '100%',
   },
   iconNote: {
     width: 24,
     height: 24,
     resizeMode: 'contain',
     tintColor: Colors.grey60,
-    marginRight: 16
+    marginRight: 8,
+    marginTop: 8
   },
-  note: {
+  inputBoxNote: {
+    width: '90%',
+    height: 70,
+    backgroundColor: 'rgba(255, 255,255,0.2)',
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    flexWrap: 'wrap',
     fontSize: 16,
-    color: Colors.white
-  },
-  noteInput: {
-    color: 'white'
-    // backgroundColor: 'blue',
-    // height: 20
+    color: '#ffffff',
   },
 
   arrowRightContainer: {
@@ -101,8 +94,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 8,
-    // backgroundColor: 'blue'
+    paddingVertical: 8
   },
   splitBillCardUsername: {
     fontSize: 14,
@@ -110,4 +102,8 @@ export const styles = StyleSheet.create({
   splitBillCardPhoneNumber: {
     fontSize: 14,
   },
+
+  buttonContainer: {
+    padding: 16,
+  }
 });
