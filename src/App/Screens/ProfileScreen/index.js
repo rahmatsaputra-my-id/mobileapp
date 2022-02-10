@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { styles } from './styles';
-import { iconRahmatSaputra } from '../../Assets/Shared';
+import { iconUser } from '../../Assets/Shared';
 import { connect } from 'react-redux';
 import { getUser, postLogout } from '../../Global/Helper/Action';
 import CModal from '../../Global/Components/CModal';
@@ -172,7 +172,7 @@ class ProfileScreen extends Component {
                 <View style={styles.headerColumn}>
                   <Image
                     style={styles.userImage}
-                    source={iconRahmatSaputra}
+                    source={iconUser}
                   />
                   <Text style={styles.userNameText}>
                     {username}

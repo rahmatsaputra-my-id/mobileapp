@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 27,
     fontWeight: 'bold',
-    // fontFamily: Fonts.poppinsBold,
     textAlign: 'center'
   },
   description: {
