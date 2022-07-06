@@ -45,7 +45,7 @@ export default class SplitBillDetailScreen extends Component {
     const splitPrice = totalPrice > (totalPrice / totalParticipant);
     // const { title, author, description, urlToImage, content, url } = route?.params;
     const note1 = 'beli makan dirumah itu yang banyak banget terus dibawa pulang'
-    const username = "Muhammad Rizky Al Fatih"
+    const username = "Matteo Gelato"
     const keyboardType = Platform.OS === 'ios' ? 'ascii-capable' : 'visible-password';
     // const price = formatRupiah(50000, 'Rp. ');
     // console.log('price', price);
